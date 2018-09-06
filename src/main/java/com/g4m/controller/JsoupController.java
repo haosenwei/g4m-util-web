@@ -48,7 +48,7 @@ public class JsoupController {
 		String o = restTemplate.postForObject(url, requestEntity, String.class);
 		logger.info("请求地址:"+url +",返回:"+o);
 		writeBack(response,callback,o);
-		return o;
+		return null;
 	}	
 	@RequestMapping(value="/ip")
 	@ResponseBody
@@ -92,7 +92,7 @@ public class JsoupController {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		out.print("var ip = '" + ip + "';");
-		return "";
+		return null;
 	}	
 
 	private void writeBack(HttpServletResponse response, String callback, String o) throws IOException {
