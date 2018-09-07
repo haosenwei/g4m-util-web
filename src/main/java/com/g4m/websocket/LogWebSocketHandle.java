@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.g4m.thread.TailLogThread;
 
-@ServerEndpoint(value="/log")
+@ServerEndpoint(value="/loglog")
 @Component
 public class LogWebSocketHandle {
 
