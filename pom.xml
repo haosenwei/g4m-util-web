@@ -5,7 +5,7 @@
 	<groupId>com.g4m</groupId>
 	<artifactId>g4m-util-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>g4m-util-web</name>
 	<url>http://maven.apache.org</url>
