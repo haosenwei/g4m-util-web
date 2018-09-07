@@ -1,0 +1,8 @@
+spring:
+##  cloud:
+##    config:
+##      label: dev
+##      profile: dev
+##      uri: http://8888.b.bangmc.vip
+  application:
+    name: g4m-util-web
