@@ -12,7 +12,7 @@ public class LogController {
 	private final static Logger logger = LoggerFactory.getLogger(LogController.class);
 
 	@RequestMapping(value="/tolog")
-	public String getJsoup() throws IOException {
+	public String tolog() throws IOException {
 		return "log/log";
 	}	
 

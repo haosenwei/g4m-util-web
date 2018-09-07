@@ -12,11 +12,12 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import com.g4m.controller.JsoupController;
 import com.g4m.thread.TailLogThread;
 
-@ServerEndpoint("/log")
+@ServerEndpoint(value="/log")
+@Component
 public class LogWebSocketHandle {
 
 	private final static Logger logger = LoggerFactory.getLogger(LogWebSocketHandle.class);
