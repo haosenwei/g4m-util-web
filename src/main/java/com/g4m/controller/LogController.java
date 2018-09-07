@@ -13,7 +13,7 @@ public class LogController {
 
 	@RequestMapping(value="/tolog")
 	public String getJsoup() throws IOException {
-		return "log";
+		return "log/log";
 	}	
 
 }

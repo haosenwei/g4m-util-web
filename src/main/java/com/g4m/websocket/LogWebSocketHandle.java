@@ -32,7 +32,7 @@ public class LogWebSocketHandle {
 	public void onOpen(Session session) {
 		try {
 			// 执行tail -f命令
-			process = Runtime.getRuntime().exec("tail -f /root/.jenkins/workspace/g4m-util-web/target/8080.log ");
+			process = Runtime.getRuntime().exec("tail -f /data/tomcat-8080/logs/catalina.out ");
 			inputStream = process.getInputStream();
 			
 			// 一定要启动新的线程，防止InputStream阻塞处理WebSocket的线程
