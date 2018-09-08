@@ -40,7 +40,7 @@ public class JsoupController {
 			for (String string : split) {
 				try {
 					String[] split2 = string.split("=");
-					requestEntity.add(split2[0],split2[0]);
+					requestEntity.add(split2[0],split2[1]);
 				} catch (Exception e) {
 				}
 			}
@@ -101,5 +101,4 @@ public class JsoupController {
 		PrintWriter out = response.getWriter();
 		out.print(callback + "(" + o + ")");
 	}
-
 }
