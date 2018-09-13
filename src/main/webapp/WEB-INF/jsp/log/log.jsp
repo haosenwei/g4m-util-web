@@ -14,7 +14,7 @@
 <script>
     $(document).ready(function() {
         // 指定websocket路径
-        var websocket = new WebSocket('ws://8080.h.bangmc.vip/log');
+        var websocket = new WebSocket('ws://8080.b.bangmc.vip/loglog');
         websocket.onmessage = function(event) {
             // 接收服务端的实时日志并添加到HTML页面中
             $("#log-container div").append(event.data);

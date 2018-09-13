@@ -27,7 +27,7 @@ public class JsoupController {
 	@ResponseBody
 	public Object getJsoup(String url,String callback,HttpServletResponse response) throws IOException {
 		String o = restTemplate.getForObject(url, String.class);
-		logger.info("请求地址:"+url +",返回:"+o.toString());
+		logger.info("请求地址:"+url +",回调:"+callback+",返回:"+o.toString());
 		writeBack(response,callback,o);
 		return null;
 	}	
@@ -40,13 +40,13 @@ public class JsoupController {
 			for (String string : split) {
 				try {
 					String[] split2 = string.split("=");
-					requestEntity.add(split2[0],split2[0]);
+					requestEntity.add(split2[0],split2[1]);
 				} catch (Exception e) {
 				}
 			}
 		}
 		String o = restTemplate.postForObject(url, requestEntity, String.class);
-		logger.info("请求地址:"+url +",返回:"+o);
+		logger.info("请求地址:"+url +",参数:"+param+",回调:"+callback+",返回:"+o);
 		writeBack(response,callback,o);
 		return null;
 	}	
@@ -101,5 +101,4 @@ public class JsoupController {
 		PrintWriter out = response.getWriter();
 		out.print(callback + "(" + o + ")");
 	}
-
 }
