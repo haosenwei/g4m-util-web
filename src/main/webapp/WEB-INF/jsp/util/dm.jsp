@@ -8,7 +8,8 @@
 <title>弹幕网站</title>
 <style type="text/css">
 body {
-	background: url(images/01.jpg); no-repeat top center;
+	background: url(/static/images/01.jpg);
+	no-repeat top center;
 	font-size: 12px;
 	font-family: "微软雅黑";
 }
