@@ -8,12 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class LogController {
-	private final static Logger logger = LoggerFactory.getLogger(LogController.class);
+public class WebSocketController {
+	private final static Logger logger = LoggerFactory.getLogger(WebSocketController.class);
 
 	@RequestMapping(value="/tolog")
 	public String tolog() throws IOException {
-		return "log/log";
+		return "util/log";
+	}	
+	@RequestMapping(value="/todm")
+	public String todm() throws IOException {
+		return "util/dm";
 	}	
 
 }
