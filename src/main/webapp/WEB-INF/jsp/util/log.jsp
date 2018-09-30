@@ -53,9 +53,9 @@
 	        var websocket = new WebSocket('ws://8080.b.bangmc.vip/loglog');
 	        websocket.onmessage = function(event) {
 	            // 接收服务端的实时日志并添加到HTML页面中
-	            $("#log-container div").append(event.data);
+	            $("#log-container").append(event.data);
 	            // 滚动条滚动到最低部
-	            $("#log-container").scrollTop($("#log-container div").height() - $("#log-container").height());
+	            $("#log-container").scrollTop($("#log-container").scrollHeight());
 	        };
 	    });
 	</script>
