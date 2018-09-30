@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +27,11 @@ public class JsoupController {
 	@RequestMapping(value="/getjsoup")
 	@ResponseBody
 	public Object getJsoup(String url,String callback,HttpServletResponse response) throws IOException {
-		String o = restTemplate.getForObject(url, String.class);
-		logger.info("请求地址:"+url +",回调:"+callback+",返回:"+o.toString());
+		Object o = restTemplate.getForObject(url, Object.class);
+		logger.info("请求地址:"+url +",回调方法:"+callback+",返回:"+o.toString());
+		if(StringUtils.isEmpty(callback)) {
+			return o;
+		}
 		writeBack(response,callback,o);
 		return null;
 	}	
@@ -42,11 +46,15 @@ public class JsoupController {
 					String[] split2 = string.split("=");
 					requestEntity.add(split2[0],split2[1]);
 				} catch (Exception e) {
+					logger.error("post请求参数错误", e);
 				}
 			}
 		}
-		String o = restTemplate.postForObject(url, requestEntity, String.class);
-		logger.info("请求地址:"+url +",参数:"+param+",回调:"+callback+",返回:"+o);
+		Object o = restTemplate.postForObject(url, requestEntity, Object.class);
+		logger.info("请求地址:"+url +",参数:"+param+",回调方法:"+callback+",返回:"+o);
+		if(StringUtils.isEmpty(callback)) {
+			return o;
+		}
 		writeBack(response,callback,o);
 		return null;
 	}	
@@ -95,10 +103,10 @@ public class JsoupController {
 		return null;
 	}	
 
-	private void writeBack(HttpServletResponse response, String callback, String o) throws IOException {
+	private void writeBack(HttpServletResponse response, String callback, Object o) throws IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		out.print(callback + "(" + o + ")");
+		out.print(callback + "(" + o.toString() + ")" );
 	}
 }
