@@ -14,20 +14,26 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONObject;
 
 @RestController
 public class JsoupController {
-	private RestTemplate restTemplate = new RestTemplate();;
+	private RestTemplate restTemplate = new RestTemplate();
 
 	private final static Logger logger = LoggerFactory.getLogger(JsoupController.class);
 
 	@RequestMapping(value="/getjsoup")
 	@ResponseBody
 	public Object getJsoup(String url,String callback,HttpServletResponse response) throws IOException {
-		Object o = restTemplate.getForObject(url, Object.class);
+		Object o = "";
+		try {
+			o = restTemplate.getForObject(url, Object.class);
+		} catch (RestClientException e) {
+			logger.error("url报错:"+url,e);
+		}
 		logger.info("请求地址:"+url +",回调方法:"+callback+",返回:"+JSONObject.toJSONString(o));
 		if(StringUtils.isEmpty(callback)) {
 			return o;
@@ -50,7 +56,12 @@ public class JsoupController {
 				}
 			}
 		}
-		Object o = restTemplate.postForObject(url, requestEntity, Object.class);
+		Object o = "";
+		try {
+			o = restTemplate.postForObject(url, requestEntity, Object.class);
+		} catch (RestClientException e) {
+			logger.error("url报错:"+url,e);
+		}
 		logger.info("请求地址:"+url +",参数:"+param+",回调方法:"+callback+",返回:"+JSONObject.toJSONString(o));
 		if(StringUtils.isEmpty(callback)) {
 			return o;
