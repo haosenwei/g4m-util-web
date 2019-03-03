@@ -3,6 +3,7 @@ package com.g4m.websocket;
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -44,6 +45,16 @@ public class LogWebSocketHandle {
 		}
 	}
 
+	/**
+	 * 连接关闭调用的方法
+	 */
+	@OnClose
+	public void onClose() {
+		webSocketSet.remove(this);  //从set中删除
+		subOnlineCount();           //在线数减1
+		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
+	}
+	
 	/**
 	 * 收到客户端消息后调用的方法
 	 *
