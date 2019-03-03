@@ -1,5 +1,6 @@
 package com.g4m.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -38,6 +39,16 @@ public class WebSocketController {
 			danMuWebsocket.sendInfo(msg);
 		}
 
+		// Read from request
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = request.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            buffer.append(line);
+        }
+        System.out.print(buffer.toString());
+		
+		
 		ServletInputStream inputStream = request.getInputStream();
 		byte[] bytes = new byte[0];
 		bytes = new byte[inputStream.available()];
