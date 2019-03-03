@@ -3,8 +3,6 @@ package com.g4m.websocket;
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -20,12 +18,6 @@ public class LogWebSocketHandle {
 
 	private final static Logger logger = LoggerFactory.getLogger(LogWebSocketHandle.class);
 	
-
-	@OnError
-	public void onError(Throwable thr) {
-		thr.printStackTrace();
-	}
-
 
 
 	//静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
@@ -53,16 +45,6 @@ public class LogWebSocketHandle {
 	}
 
 	/**
-	 * 连接关闭调用的方法
-	 */
-	@OnClose
-	public void onClose() {
-		webSocketSet.remove(this);  //从set中删除
-		subOnlineCount();           //在线数减1
-		logger.info("有一连接关闭！当前在线人数为" + getOnlineCount());
-	}
-
-	/**
 	 * 收到客户端消息后调用的方法
 	 *
 	 * @param message 客户端发送过来的消息*/
@@ -78,14 +60,6 @@ public class LogWebSocketHandle {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	/**
-	 * 发生错误时调用*/
-	@OnError
-	public void onError(Session session, Throwable error) {
-		logger.info("发生错误");
-		error.printStackTrace();
 	}
 
 
