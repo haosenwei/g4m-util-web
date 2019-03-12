@@ -102,7 +102,7 @@ public class DanMuWebsocket {
 		addOnlineCount();           //在线数加1
 		System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
-			sendMessage("aaa");
+			sendMessage("欢迎加入");
 		} catch (IOException e) {
 			System.out.println("IO异常");
 		}
