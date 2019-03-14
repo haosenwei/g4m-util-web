@@ -1,4 +1,4 @@
-package com.g4m.controller;
+package com.g4m.web.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.g4m.web.socket.DanMuWebsocket;
+import com.g4m.web.socket.LogWebSocketHandle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.g4m.util.GetIpUtil;
-import com.g4m.websocket.DanMuWebsocket;
-import com.g4m.websocket.LogWebSocketHandle;
 
 @Controller
 public class WebSocketController {

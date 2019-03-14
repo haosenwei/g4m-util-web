@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.g4m.auth.mapper.SysUserMapper">
+	<resultMap id="SysUserBean" type="com.g4m.auth.entity.SysUser">
+		<result property="id" column="id" jdbcType="BIGINT" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="code" column="code" jdbcType="VARCHAR" />
+		<result property="username" column="username" jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
+		<result property="tel" column="tel" jdbcType="VARCHAR" />
+		<result property="age" column="age" jdbcType="INTEGER" />
+		<result property="sysOrgId" column="sys_org_id" jdbcType="BIGINT" />
+		<result property="ownerId" column="owner_id" jdbcType="BIGINT" />
+		<result property="createTime" column="create_time" jdbcType="TIMESTAMP" />
+		<result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP" />
+		<result property="modifyUserId" column="modify_user_id" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<sql id="SysUserSelectColumns">
+		t.id ,
+		t.name ,
+		t.code ,
+		t.username ,
+		t.password ,
+		t.email ,
+		t.tel ,
+		t.age ,
+		t.sys_org_id ,
+		t.owner_id ,
+		t.create_time ,
+		t.modify_time ,
+		t.modify_user_id 
+	</sql>
+	<sql id="dynamicWhere">
+		<if test=" id != null and id != '' ">
+			and t.id = #{id}
+		</if>
+		<if test=" name != null and name != '' ">
+			and t.name = #{name}
+		</if>
+		<if test=" code != null and code != '' ">
+			and t.code = #{code}
+		</if>
+		<if test=" username != null and username != '' ">
+			and t.username = #{username}
+		</if>
+		<if test=" password != null and password != '' ">
+			and t.password = #{password}
+		</if>
+		<if test=" email != null and email != '' ">
+			and t.email = #{email}
+		</if>
+		<if test=" tel != null and tel != '' ">
+			and t.tel = #{tel}
+		</if>
+		<if test=" age != null and age != '' ">
+			and t.age = #{age}
+		</if>
+		<if test=" sysOrgId != null and sysOrgId != '' ">
+			and t.sys_org_id = #{sysOrgId}
+		</if>
+		<if test=" ownerId != null and ownerId != '' ">
+			and t.owner_id = #{ownerId}
+		</if>
+		<if test=" createTime != null and createTime != '' ">
+			and t.create_time = #{createTime}
+		</if>
+		<if test=" modifyTime != null and modifyTime != '' ">
+			and t.modify_time = #{modifyTime}
+		</if>
+		<if test=" modifyUserId != null and modifyUserId != '' ">
+			and t.modify_user_id = #{modifyUserId}
+		</if>
+		<if test=" dataScope !=null and dataScope != '' ">
+			and #{dataScope}
+		</if>
+	</sql>
+
+	<!-- 根据 id 查询,null对象 -->
+	<select id="selectSysUserById" parameterType="map" resultMap="SysUserBean">
+		select <include refid="SysUserSelectColumns" />
+		from sys_user t where t.id = #{id}
+		
+		
+	</select>
+	
+	<!-- 查询所有,null对象 -->
+	<select id="selectSysUserAll" resultMap="SysUserBean">
+		select <include refid="SysUserSelectColumns" />
+		from sys_user t
+	</select>
+
+	<!-- 插入,null对象 主键自动生成 -->
+	<insert id="insertSysUser" keyProperty="id" useGeneratedKeys="true" parameterType="Map">
+		insert into sys_user
+		(
+			id, 
+			name, 
+			code, 
+			username, 
+			password, 
+			email, 
+			tel, 
+			age, 
+			sys_org_id, 
+			owner_id, 
+			create_time, 
+			modify_time, 
+			modify_user_id 
+		)
+		values( 
+			#{id}, 
+			#{name}, 
+			#{code}, 
+			#{username}, 
+			#{password}, 
+			#{email}, 
+			#{tel}, 
+			#{age}, 
+			#{sysOrgId}, 
+			#{ownerId}, 
+			#{createTime}, 
+			#{modifyTime}, 
+			#{modifyUserId} 
+		)
+	</insert>
+
+	<!-- 更新,null对象 -->
+	<update id="updateSysUser" parameterType="Map">
+		update sys_user set
+		id = #{id},
+		name = #{name},
+		code = #{code},
+		username = #{username},
+		password = #{password},
+		email = #{email},
+		tel = #{tel},
+		age = #{age},
+		sys_org_id = #{sysOrgId},
+		owner_id = #{ownerId},
+		create_time = #{createTime},
+		modify_time = #{modifyTime},
+		modify_user_id = #{modifyUserId}
+		where
+	</update>
+	
+	<!-- 删除,null对象 -->
+	<delete id="delSysUserByIds" parameterType="Map">
+		delete from sys_user where  in (${ids})
+	</delete>
+
+	<!-- 根据 条件 查询,null对象 -->
+	<select id="selectSysUserByCondition" parameterType="Map" resultMap="SysUserBean">
+		select <include refid="SysUserSelectColumns" />
+		from sys_user t
+		where 1 = 1 <include refid="dynamicWhere" />
+	</select>
+	
+	<!-- 根据 条件更新,null对象 -->
+	<update id="updateSysUserByCondition" parameterType="Map">
+		update sys_user
+		<set>
+			<if test=" id !=null and id != '' ">
+				id = #{id},
+			</if>
+			<if test=" name !=null and name != '' ">
+				name = #{name},
+			</if>
+			<if test=" code !=null and code != '' ">
+				code = #{code},
+			</if>
+			<if test=" username !=null and username != '' ">
+				username = #{username},
+			</if>
+			<if test=" password !=null and password != '' ">
+				password = #{password},
+			</if>
+			<if test=" email !=null and email != '' ">
+				email = #{email},
+			</if>
+			<if test=" tel !=null and tel != '' ">
+				tel = #{tel},
+			</if>
+			<if test=" age !=null and age != '' ">
+				age = #{age},
+			</if>
+			<if test=" sysOrgId !=null and sysOrgId != '' ">
+				sys_org_id = #{sysOrgId},
+			</if>
+			<if test=" ownerId !=null and ownerId != '' ">
+				owner_id = #{ownerId},
+			</if>
+			<if test=" createTime !=null and createTime != '' ">
+				create_time = #{createTime},
+			</if>
+			<if test=" modifyTime !=null and modifyTime != '' ">
+				modify_time = #{modifyTime},
+			</if>
+			<if test=" modifyUserId !=null and modifyUserId != '' ">
+				modify_user_id = #{modifyUserId}
+			</if>
+		</set>
+		where 1=1
+			<if test=" idCondition !=null and idCondition != '' ">
+				and id = #{idCondition},
+			</if>
+			<if test=" nameCondition !=null and nameCondition != '' ">
+				and name = #{nameCondition},
+			</if>
+			<if test=" codeCondition !=null and codeCondition != '' ">
+				and code = #{codeCondition},
+			</if>
+			<if test=" usernameCondition !=null and usernameCondition != '' ">
+				and username = #{usernameCondition},
+			</if>
+			<if test=" passwordCondition !=null and passwordCondition != '' ">
+				and password = #{passwordCondition},
+			</if>
+			<if test=" emailCondition !=null and emailCondition != '' ">
+				and email = #{emailCondition},
+			</if>
+			<if test=" telCondition !=null and telCondition != '' ">
+				and tel = #{telCondition},
+			</if>
+			<if test=" ageCondition !=null and ageCondition != '' ">
+				and age = #{ageCondition},
+			</if>
+			<if test=" sysOrgIdCondition !=null and sysOrgIdCondition != '' ">
+				and sys_org_id = #{sysOrgIdCondition},
+			</if>
+			<if test=" ownerIdCondition !=null and ownerIdCondition != '' ">
+				and owner_id = #{ownerIdCondition},
+			</if>
+			<if test=" createTimeCondition !=null and createTimeCondition != '' ">
+				and create_time = #{createTimeCondition},
+			</if>
+			<if test=" modifyTimeCondition !=null and modifyTimeCondition != '' ">
+				and modify_time = #{modifyTimeCondition},
+			</if>
+			<if test=" modifyUserIdCondition !=null and modifyUserIdCondition != '' ">
+				and modify_user_id = #{modifyUserIdCondition}
+			</if>
+	</update>
+	
+	<!--  begin分页查询 -->
+	<!-- 根据条件查询分页数据 -->
+	<select id="selectSysUserByPager" parameterType="Map" resultMap="SysUserBean">
+		select <include refid="SysUserSelectColumns" />
+		from sys_user t
+		where 1 = 1 <include refid="dynamicWhere" />
+		limit #{start}, #{length}
+	</select>
+	
+	<!-- 根据条件查询,null对象数量 -->
+	<select id="selectSysUserCountByPager" parameterType="Map" resultType="int">
+		select
+		count(1)
+		from sys_user t
+		where 1 = 1 <include refid="dynamicWhere" />
+	</select>
+	<!-- end 分页查询 -->
+	
+	<!-- 通过sql查询 -->
+	<select id="selectSysUserBySql" parameterType="Map" resultMap="SysUserBean">
+		${sql}
+	</select>
+</mapper>

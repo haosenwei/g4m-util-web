@@ -1,4 +1,4 @@
-package com.g4m.controller;
+package com.g4m.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;

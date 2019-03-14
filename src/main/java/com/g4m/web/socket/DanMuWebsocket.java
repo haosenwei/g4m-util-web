@@ -1,4 +1,4 @@
-package com.g4m.websocket;
+package com.g4m.web.socket;
 
 import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
