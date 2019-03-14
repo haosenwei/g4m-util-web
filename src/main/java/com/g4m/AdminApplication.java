@@ -16,19 +16,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
 import java.util.List;
 
 @SpringBootApplication
 @Controller
 @EnableCaching
 @EnableWebSocket
-public class AdminApplication {
+public class AdminApplication extends SpringBootServletInitializer {
     private static Logger logger = LoggerFactory.getLogger(AdminApplication.class);
     public static void main(String[] args) {
         SpringApplication.run(AdminApplication.class, args);
         logger.info("启动成功");
     }
-
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(G4mUtilWebApplication.class);
+	}
 
     @Autowired
     private SysConfigServiceImpl sysConfigServiceImpl;
