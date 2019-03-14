@@ -34,7 +34,7 @@ public class AdminApplication extends SpringBootServletInitializer {
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(G4mUtilWebApplication.class);
+		return builder.sources(AdminApplication.class);
 	}
 
     @Autowired
