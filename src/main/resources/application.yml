@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  mvc:
+    view:
+      prefix: WEB-INF/
+      suffix: .jsp
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 500
+
+hikari:
+  primary:
+    jdbc-url: jdbc:mysql://localhost:5036/auth?useSSL=false
+    username: haosenwei
+    password: Hao189108
+  base:
+    jdbc-url: jdbc:mysql://localhost:5036/base?useSSL=false
+    username: haosenwei
+    password: Hao189108
